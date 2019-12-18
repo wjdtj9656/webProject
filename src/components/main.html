@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<link rel="stylesheet" href="web.css" />
+		<link rel="stylesheet" media="(max-width: 480px)" href="mobile.css" />
+		<script src="./js/time.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+
+		  <div class="header">
+
+		<span class="noUser">
+			<input style="float:right" type="button" value="로그인" onClick="location.href='/login.html'">
+			<input style="float:right" type="button" value="회원가입" onClick="location.href='/signup.html'">
+		</span>
+		<span class="yesUser">
+			<input style="float:right" type="button" value="마이페이지" onClick="location.href='/login.html'">
+			<input id="btn-logout"style="float:right" type="button" value="로그아웃" onClick="location.href='/logout.html'">
+		</span>
+
+		  </div>
+		  <ul class="nav">
+		   <li> <a href="./board1/boardList">한식메뉴</a></li>
+		   <li> <a href="./board2/boardList">중식메뉴</a></li>
+		   <li> <a href="./board3/boardList">일식메뉴</a></li>
+		   <li> <a href="./board4/boardList">양식메뉴</a></li>
+			<li> <a href="#">랜덤</a></li>
+		   <li> <a href="mailto:wjdtj9656@gmail.com">1:1문의</a></li>
+		  </ul>
+		  <div class="row">
+		  <div class="left">
+			<div class="card">
+			  <h2>금주의 Best 레시피</h2>
+			  <h5>1위</h5>
+			  <div class="fakeimg" style="height:200px;">Image</div>
+			  <h3>집에서 회 손질법</h3>
+				<h6>1생선을....</h6>
+				<p>조회수:242</p>
+			</div>
+		  </div>
+		  <div class="right">
+			<div class="card">
+			  <h2>2~10위
+			  <h4>2.○○○의 제육볶음</h2>
+			  <h4>3.김밥 먹기 좋은날</h2>
+			  <h4>4.나만의 라면 레시피</h2>
+
+			</div>
+		  </div>
+		  <div class="bottom">
+			<div class="card">
+			  <h1>최신글</h1>
+			</div>
+		  </div>
+		  </div>
+		  <div class="footer">
+			<h3>FOOTER</h3>
+		  </div>
+
+		<script>
+		// handling user info.
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+				// User is signed in.
+				$(".noUser").hide();
+				$(".yesUser").show();
+			} else {
+				// No user is signed in.
+				$(".noUser").show();
+				$(".yesUser").hide();
+			}
+		});
+		$("#btn-logout").click(function(){
+			firebase.auth().signOut().then(function() {
+				// Sign-out successful.
+			}).catch(function(error) {
+				// An error happened.
+			});
+		});
+		</script>
+
+	</body>
